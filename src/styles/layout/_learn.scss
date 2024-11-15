@@ -1,0 +1,46 @@
+#learn{
+  @include Flexible(center, center, row,wrap, 0); 
+  padding: 120px 0;
+  background-color: #F6F4EF;
+  font-family: $Brikolage-font;
+
+  .learn-left{
+    @include Flexible(center, start, column,wrap, 0); 
+    .learn-left-top{
+      h1{
+        font-size: 56px;
+        font-weight: 600;
+        line-height: 1.2;
+      }
+      p{
+        max-width: 488px;
+        font-size: 18px;
+        color: #404040;
+      }
+    }
+    .learn-left-bot{
+      @include Flexible(center, center, row,wrap, 0);
+      margin: 10px 0; 
+      .circle{
+        @include Flexible(center, center, row,wrap, 0); 
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        margin-right: 10px;
+        background-color:#F0844E;
+        i{
+          font-size: 22px;
+          font-weight: 900;
+        }
+      }
+      h2{
+        font-family: "Lato", Sans-serif;
+        font-size: 18px;
+        font-weight: 700;
+        color: #171717;
+      }
+    }
+  }
+
+
+}

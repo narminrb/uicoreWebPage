@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<style>
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f4f6f8;
+  margin: 0;
+}
+
+.admin-container {
+  width: 90%;
+  max-width: 500px;
+  padding: 2em;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  font-size: 1.8em;
+  margin-bottom: 1em;
+  color: #333333;
+  text-align: center;
+}
+
+label {
+  font-size: 1em;
+  color: #666666;
+  margin-top: 1em;
+  display: block;
+}
+
+input[type="text"],
+textarea,
+input[type="file"] {
+  width: 100%;
+  padding: 12px;
+  margin-top: 0.5em;
+  border: 1px solid #cccccc;
+  border-radius: 8px;
+  font-size: 1em;
+  color: #333333;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+input[type="text"]:focus,
+textarea:focus {
+  border-color: #007bff;
+}
+
+textarea {
+  resize: vertical;
+  height: 100px;
+}
+
+input[type="file"] {
+  padding: 8px;
+  background-color: #f4f6f8;
+  cursor: pointer;
+  color: #555555;
+}
+
+input[type="file"]::-webkit-file-upload-button {
+  display: none;
+}
+
+input[type="file"]:before {
+  content: "Choose Image";
+  display: inline-block;
+  padding: 8px 16px;
+  color: #ffffff;
+  background-color: #007bff;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+input[type="file"]:hover:before {
+  background-color: #0056b3;
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 1.5em;
+  font-size: 1em;
+  font-weight: bold;
+  color: #ffffff;
+  background-color: #28a745;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #218838;
+}
+
+button:focus {
+  outline: none;
+}
+
+.reset-btn {
+  background-color: #dc3545;
+}
+
+.reset-btn:hover {
+  background-color: #c82333;
+}
+
+</style>
+<body>
+
+<div class="admin-container">
+  <h1>Edit Case</h1>
+  <label for="titleInput">Title:</label>
+  <input type="text" id="titleInput" placeholder="Enter case title">
+  
+  <label for="descriptionInput">Description:</label>
+  <textarea id="descriptionInput" placeholder="Enter case description"></textarea>
+  
+  <label for="imageInput">Image:</label>
+  <input type="file" id="imageInput">
+
+  <button id="saveChangesBtn">Save Changes</button>
+  <button id="resetBtn" class="reset-btn">Reset</button>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const caseData = JSON.parse(localStorage.getItem("selectedCase"));
+    const initialCaseData = JSON.parse(localStorage.getItem("initialCaseData"));
+
+    if (caseData) {
+      document.getElementById("titleInput").value = caseData.title;
+      document.getElementById("descriptionInput").value = caseData.description;
+    }
+
+    document.getElementById("saveChangesBtn").addEventListener("click", function () {
+      const updatedData = {
+        ...caseData,
+        title: document.getElementById("titleInput").value,
+        description: document.getElementById("descriptionInput").value,
+      };
+
+      const imageInput = document.getElementById("imageInput");
+      if (imageInput.files.length > 0) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          updatedData.imgSrc = e.target.result;
+          saveToLocalStorageAndRedirect(updatedData);
+        };
+        reader.readAsDataURL(imageInput.files[0]);
+      } else {
+        saveToLocalStorageAndRedirect(updatedData);
+      }
+    });
+    document.getElementById("resetBtn").addEventListener("click", function () {
+      const initialData = JSON.parse(localStorage.getItem("initialCaseData"));
+      const caseToReset = initialData.find(c => c.id === caseData.id); 
+      
+      if (caseToReset) {
+        saveToLocalStorageAndRedirect(caseToReset);
+      } else {
+        alert("Original data for this case not found.");
+      }
+    });
+    
+
+    function saveToLocalStorageAndRedirect(data) {
+      localStorage.setItem("selectedCase", JSON.stringify(data));
+      window.location.href = "index.html";
+    }
+  });
+</script>
+</body>
+</html>

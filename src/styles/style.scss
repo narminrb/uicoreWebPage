@@ -1,0 +1,21 @@
+@import "./mixin/mixin";
+@import "./base/base";
+@import "./variables/variable";
+@import "./layout/navbar";
+@import "./layout/banner";
+@import "./layout/brands";
+@import "./layout/methods";
+@import "./layout/categories";
+@import "./layout/accordion";
+@import "./layout/featured";
+@import "./layout/learn";
+@import "./layout/black";
+@import "./layout/footer";
+@import "./layout/login";
+
+*{
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&display=swap');

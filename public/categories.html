@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Category Details</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f9f9f9;
+  color: #333;
+  line-height: 1.6;
+}
+
+h1, h2, h3, p {
+  margin: 0;
+}
+
+.container {
+  width: 80%;
+  margin: 0 auto;
+}
+
+button {
+  cursor: pointer;
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+button:disabled {
+  background-color: #ccc;
+}
+
+#category-details {
+  padding: 50px 0;
+  background-color: #fff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  margin-bottom: 30px;
+}
+
+.category-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.category-image {
+  width: 100%;
+  max-width: 300px;
+  margin-bottom: 20px;
+}
+
+.category-img-box {
+  position: relative;
+  overflow: hidden;
+  border-radius: 10px;
+  height: 200px;
+  width: 100%;
+  background-color: #00b3b0;
+}
+
+.category-img-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.category-text-box h2 {
+  font-size: 32px;
+  color: #333;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.category-text-box p {
+  font-size: 18px;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.category-text-box h3 {
+  font-size: 18px;
+  color: #007bff;
+  display: flex;
+  align-items: center;
+}
+
+.category-text-box h3 span {
+  margin-left: 10px;
+}
+
+.edit-container {
+  margin-top: 30px;
+  background-color: #f3f3f3;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.edit-container label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.edit-container input,
+.edit-container textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
+  color: #333;
+}
+
+.edit-container textarea {
+  height: 100px;
+  resize: vertical;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.button-container button {
+  width: 48%;
+  padding: 12px;
+  font-size: 16px;
+}
+
+#save-button {
+  background-color: #28a745;
+}
+
+#save-button:hover {
+  background-color: #218838;
+}
+
+#reset-button {
+  background-color: #dc3545;
+}
+
+#reset-button:hover {
+  background-color: #c82333;
+}
+
+  </style>
+</head>
+<body>
+  <section id="category-details">
+    <div class="container">
+      <div class="category-card">
+        <div class="category-image">
+          <div class="category-img-box">
+            <img id="category-img" src="" alt="Category Image">
+          </div>
+        </div>
+        <div class="category-text-box">
+          <h2 id="category-title">Category Title</h2>
+          <p id="category-desc">Category Description</p>
+          <h3>View Lessons <span><i class="ri-arrow-drop-right-line"></i></span></h3>
+        </div>
+      </div>
+
+      <div class="edit-container">
+        <label for="category-img-url">Image URL:</label>
+        <input type="text" id="category-img-url" placeholder="Enter image URL">
+
+        <label for="category-title-input">Title:</label>
+        <input type="text" id="category-title-input" placeholder="Enter category title">
+
+        <label for="category-desc-input">Description:</label>
+        <textarea id="category-desc-input" placeholder="Enter category description"></textarea>
+      </div>
+
+      
+      <div class="button-container">
+        <button id="save-button" onclick="saveChanges()">Save Changes</button>
+        <button id="reset-button" onclick="resetCategory()">Reset</button>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const defaultCategory = {
+      1: {
+        title: 'Business and Management',
+        desc: '32 online courses',
+        img: 'https://outgrid.uicore.co/elearning/wp-content/uploads/sites/5/2023/06/eLearning-Courses-Icon-1.webp',
+      },
+      2: {
+        title: 'Technology and IT',
+        desc: '24 online courses',
+        img: 'https://outgrid.uicore.co/elearning/wp-content/uploads/sites/5/2023/06/eLearning-Courses-Icon-2.webp',
+      },
+      3: {
+        title: 'Communication',
+        desc: '11 online courses',
+        img: 'https://outgrid.uicore.co/elearning/wp-content/uploads/sites/5/2023/06/eLearning-Courses-Icon-3.webp',
+      },
+      4: {
+        title: 'Arts and Design',
+        desc: '56 online courses',
+        img: 'https://outgrid.uicore.co/elearning/wp-content/uploads/sites/5/2023/06/eLearning-Courses-Icon-4.webp',
+      },
+      5: {
+        title: 'Marketing',
+        desc: '20 online courses',
+        img: 'https://outgrid.uicore.co/elearning/wp-content/uploads/sites/5/2023/06/eLearning-Courses-Icon-5.webp',
+      },
+      6: {
+        title: 'Personal Development',
+        desc: '17 online courses',
+        img: 'https://outgrid.uicore.co/elearning/wp-content/uploads/sites/5/2023/06/eLearning-Courses-Icon-6.webp',
+      }
+    };
+
+    function getCategoryFromURL() {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get('category');
+    }
+
+    function updateCategory() {
+      const categoryId = getCategoryFromURL();
+      let category = JSON.parse(localStorage.getItem(`category-${categoryId}`)) || defaultCategory[categoryId] || defaultCategory[1];
+
+      document.getElementById('category-img').src = category.img;
+      document.getElementById('category-title').textContent = category.title;
+      document.getElementById('category-desc').textContent = category.desc;
+
+      document.getElementById('category-img-url').value = category.img;
+      document.getElementById('category-title-input').value = category.title;
+      document.getElementById('category-desc-input').value = category.desc;
+    }
+
+    function saveChanges() {
+      const categoryId = getCategoryFromURL();
+
+      const updatedCategory = {
+        title: document.getElementById('category-title-input').value,
+        desc: document.getElementById('category-desc-input').value,
+        img: document.getElementById('category-img-url').value
+      };
+
+ 
+      localStorage.setItem(`category-${categoryId}`, JSON.stringify(updatedCategory));
+
+      
+      window.location.href = "index.html";
+    }
+
+    function resetCategory() {
+      const categoryId = getCategoryFromURL();
+      const category = defaultCategory[categoryId] || defaultCategory[1];
+
+      document.getElementById('category-img').src = category.img;
+      document.getElementById('category-title').textContent = category.title;
+      document.getElementById('category-desc').textContent = category.desc;
+
+      document.getElementById('category-img-url').value = category.img;
+      document.getElementById('category-title-input').value = category.title;
+      document.getElementById('category-desc-input').value = category.desc;
+      localStorage.removeItem(`category-${categoryId}`);
+
+      window.location.href = "index.html";
+    }
+
+    window.onload = updateCategory;
+  </script>
+</body>
+</html>

@@ -1,0 +1,230 @@
+// #featured {
+//   @include Flexible(center, center, row, wrap, 0);
+//   padding: 100px 0;
+//   background-color: #1E1C1B;
+//   font-family: $Brikolage-font;
+
+//   .card-wrapper {
+//     @include Flexible(center, center, row, wrap, 0);
+//     max-width: 1450px;
+//     padding: 20px 0;
+//     overflow: hidden;
+//     position: relative;
+
+//     .card-list {
+//       display: flex;
+//       padding: 0;
+//       justify-content: flex-start;
+//     }
+
+//     .card-item {
+//       list-style: none;
+//       padding: 0 22px;
+
+//       .card-link {
+//         user-select: none;
+//         display: block;
+//         background: white;
+//         padding: 18px;
+//         border-radius: 12px;
+//         text-decoration: none;
+//         width: 100%; /* Let the card grow to the full available width */
+//         height: 500px;
+//         display: flex;
+//         flex-direction: column; /* Make the content stack vertically */
+//         justify-content: space-between;
+
+//         .card-image {
+//           width: 100%;
+//           aspect-ratio: 16/9;
+//           object-fit: cover;
+//           border-radius: 10px;
+//         }
+
+//         .badge {
+//           color: #171717;
+//           padding: 8px 16px;
+//           font-size: 0.95rem;
+//           font-weight: 500;
+//           margin: 16px 0 18px;
+//           background-color: red;
+//           width: fit-content;
+//           border-radius: 50px;
+//         }
+
+//         .card-title {
+//           font-size: 1.19rem;
+//           color: #000;
+//           font-weight: 600;
+//           margin-top: 10px;
+//         }
+//       }
+//     }
+
+//     /* Swiper Buttons */
+//     .button-prev, .button-next {
+//       position: absolute;
+//       top: 50%;
+//       z-index: 10;
+//       background: transparent;
+//       border: none;
+//       font-size: 1.6rem;
+//       color: #ccc;
+//       cursor: pointer;
+//       transition: color 0.3s;
+//       transform: translateY(-50%);
+//     }
+
+//     .button-prev {
+//       left: 10px; /* Position it better on the left */
+//     }
+
+//     .button-next {
+//       right: 10px; /* Position it better on the right */
+//     }
+//   }
+
+//   @media screen and (max-width: 768px) {
+//     .card-wrapper {
+//       margin: 0 10px 25px;
+//     }
+//   }
+// }
+:root {
+  --first-color: hsl(38, 92%, 58%);
+  --first-color-light: hsl(38, 100%, 78%);
+  --first-color-alt: hsl(32, 75%, 50%);
+  --second-color: hsl(195, 75%, 52%);
+  --dark-color: hsl(212, 40%, 12%);
+  --white-color: hsl(212, 4%, 95%);
+  --body-color: hsl(212, 42%, 15%);
+  --container-color: hsl(212, 42%, 20%);
+  --h2-font-size: 1.25rem;
+  --normal-font-size: 1rem;
+}
+
+#featured{
+  @include Flexible(center, center, row, wrap, 0);
+  padding: 90px 0;
+  background-color: #1E1C1B;
+  font-family: $Brikolage-font;
+  
+  .card-container {
+    padding-block: 5rem;
+  
+    .swiper-button-prev:after,
+    .swiper-button-next:after {
+      content: "";
+    }
+  
+    .swiper-button-prev,
+    .swiper-button-next {
+      width: initial;
+      height: initial;
+      font-size: 24px;
+      color: rgba(102, 102, 102, 0.5);
+      display: block; 
+      position: absolute; 
+      top: 50%;
+      transform: translateY(-50%); 
+      z-index: 10; 
+    }
+  
+    .swiper-button-prev {
+      left: 10px; 
+    }
+  
+    .swiper-button-next {
+      right: 10px; 
+    }
+  
+    .card-content {
+      margin-inline: 1.75rem;
+      border-radius: 1rem;
+      overflow: hidden;
+      padding: 20px;
+  
+      .card-article {
+        border-radius: 1rem;
+        overflow: hidden;
+        
+        .card-image {
+          @include Flexible(start,start, column, wrap, 0);
+          position: relative;
+          background-color: var(--first-color-light);
+          margin-bottom: -.75rem;
+  
+          img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            margin: 0 auto;
+            position: relative;
+            z-index: 5;
+          }
+  
+          .card-shadow {
+            width: 200px;
+            height: 200px;
+            background-color: var(--first-color-alt);
+            border-radius: 50%;
+            position: absolute;
+            top: 3.75rem;
+            left: 0;
+            right: 0;
+            margin-inline: auto;
+            filter: blur(45px);
+          }
+        }
+  
+        .card-data {
+          @include Flexible(start,start, column, wrap, 0);
+          background-color: #FFF;
+          padding: 1.5rem 1.5rem;
+          position: relative;
+          z-index: 10;
+          .star-box{
+            @include Flexible(start,start, row, wrap, 10px);
+            margin: 5px 0;
+            i{
+              color: #ed9700;
+              font-size: 18px;
+            }
+          }
+          .card-name {
+            margin: 5px 0;
+            font-size: 20px;
+            line-height: 28px;
+            font-weight: 600;
+          }
+  
+          .card-description {
+            width: auto; 
+            font-weight: 500;
+            line-height: 1.6;
+            font-size: 15px;
+            color: #171717;
+            margin-bottom: 1.75rem;
+          }
+  
+          .card-button {
+            display: inline-block;
+            color: var(--first-color);
+            font-weight: 600;
+            text-decoration: none;
+          }
+        }
+      }
+    }
+  }
+  
+}
+
+ 
+ 
+
+
+
+
+/* Swiper class */
+

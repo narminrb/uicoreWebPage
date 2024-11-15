@@ -1,0 +1,97 @@
+#black {
+    @include Flexible(center, center, row, wrap, 0);
+    padding: 90px 0;
+    background-color: #1E1C1B;
+    font-family: $Brikolage-font;
+  .row{
+    @include Flexible(center, center, row, wrap, 0);
+  }
+   
+    .black-box {
+        @include Flexible(center, start, column, wrap, 0);
+      max-width: 90%;
+      padding: 100px;
+      border-radius: 8px;
+      border: 1px solid #4A4837;
+      min-height: 480px; 
+      position: relative; 
+      box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3);
+      background-image: url("https://outgrid.uicore.co/elearning/wp-content/uploads/sites/5/2023/06/eLearning-CTA-Image.webp");
+      background-position: center right;
+      background-repeat: no-repeat;
+      background-size: contain; 
+      &:before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: transparent;
+    background-image: linear-gradient(90deg, #1E1C1B 65%, #1E1C1B96 90%);
+    opacity: 1;
+        z-index: 1;
+      }
+  
+      .text-box{
+        max-width: 600px;
+        margin-bottom: 20px;
+        h1, p {
+            position: relative;
+            z-index: 2; /* Keeps text above the overlay */
+          }
+      
+          h1 {
+            color: white;
+            margin-top: 20px;
+            font-size: 56px;
+            font-weight: 700;
+            line-height: 1.2;
+          }
+      
+          p {
+            color: #CBCBCB; /* A lighter shade for the text */
+            font-size: 18px;
+            margin: 30px 0;
+          }
+      }
+      .black-box-btn{
+        @include Flexible(start, center, row, wrap, 25px);
+        position: relative;
+        z-index: 2;
+        .orange{
+            padding: 16px 35px;
+            border-radius: 100px;
+            border: none;
+            background-color: #F0844E;
+            transition: 0.3s ease-in-out;
+            a{
+                text-decoration: none;
+                color: #171717;
+                font-size: 18px;
+                font-weight: 700;
+            }
+            &:hover{
+                background-color: #F6C143;
+            }
+        }
+        .white{
+            padding: 16px 35px;
+            border-radius: 100px;
+            border: none;
+            background-color: white;
+            transition: 0.3s ease-in-out;
+            a{
+                text-decoration: none;
+                color: #171717;
+                font-size: 18px;
+                font-weight: 700;
+            }
+            &:hover{
+                background-color: #F6C143;
+            }
+        }
+      }
+    }
+  }
+  
